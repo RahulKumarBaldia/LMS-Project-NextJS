@@ -1,36 +1,144 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# LMSCourse
 
-## Getting Started
+A full-stack Learning Management System built with **Next.js**, **MongoDB**, and **JWT auth**. Students can browse courses, enroll, track lesson progress, and continue learning from a personal dashboard. Admins can manage courses and lessons.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features
+
+- **Auth** — signup, login, logout with `httpOnly` JWT cookies; roles: `student`, `instructor`, `admin`
+- **Courses** — browse, search, and filter by category / difficulty; course detail pages with lesson lists
+- **Enrollment** — enroll in courses and access learning content
+- **Lessons** — lesson viewer with sidebar navigation and previous / next lesson support
+- **Progress** — mark lessons complete and track course completion
+- **Dashboard** — enrolled courses, continue learning, and completed courses
+- **Admin** — course and lesson management UI (`/admin`)
+- **Seed APIs** — bootstrap courses, lessons, and an admin user for local / temporary prod setup
+
+---
+
+## Tech stack
+
+| Layer | Choice |
+| --- | --- |
+| Framework | Next.js 16 (App Router) |
+| UI | React 19, Tailwind CSS 4, Lucide icons |
+| Database | MongoDB + Mongoose |
+| Auth | JWT (`jsonwebtoken`) + bcrypt password hashing |
+
+Architecture follows a layered flow:
+
+```text
+API route → controller → service → model
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Project structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```text
+src/
+├── app/                 # Pages + API routes (App Router)
+│   ├── api/             # REST endpoints (auth, courses, lessons, enrollment, progress, seed)
+│   ├── admin/           # Admin panel
+│   ├── auth|login|signup/
+│   ├── courses/         # Catalog + course detail
+│   ├── dashboard/       # Learner dashboard
+│   └── learn/           # Lesson player
+├── components/          # UI (auth, courses, dashboard, learning, admin)
+├── context/             # AuthContext
+├── controllers/         # Request handlers
+├── services/            # Business logic
+├── models/              # Mongoose models (User, Course, Lesson, Enrollment, Progress)
+├── middleware/          # Auth + role checks
+├── validators/          # Input validation
+├── lib/                 # db, auth, cookies, env helpers
+└── data/                # Static seed content for courses/lessons
+```
 
-## Learn More
+### Main pages
 
-To learn more about Next.js, take a look at the following resources:
+| Route | Purpose |
+| --- | --- |
+| `/` | Landing / featured courses |
+| `/courses` | Course catalog |
+| `/courses/[slug]` | Course detail + enroll |
+| `/learn/[courseSlug]/[lessonSlug]` | Lesson player |
+| `/dashboard` | Learner progress |
+| `/login`, `/signup`, `/auth` | Authentication |
+| `/admin` | Admin management |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Environment
 
-## Deploy on Vercel
+Copy `.env.example` to `.env.local` (local) or set the same values on your host (Vercel/etc):
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+cp .env.example .env.local
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Required**
+
+- `MONGODB_URI` — MongoDB connection string
+- `JWT_SECRET` — long random secret for auth tokens
+
+**Optional (admin seed)**
+
+- `ADMIN_NAME`
+- `ADMIN_EMAIL`
+- `ADMIN_PASSWORD`
+
+**Production-only**
+
+- `ALLOW_SEED=true` — temporarily enable seed routes; remove immediately after use
+
+---
+
+## Local development
+
+```bash
+npm install
+npm run dev
+```
+
+App runs at [http://localhost:3000](http://localhost:3000).
+
+### Seed data (dev only; app must be running)
+
+```bash
+# Courses
+# GET http://localhost:3000/api/seed
+
+# Lessons
+npm run seed:lessons
+# or GET http://localhost:3000/api/seed/lessons
+
+# Admin user
+npm run seed:admin
+# or GET http://localhost:3000/api/seed/admin
+```
+
+Default local admin (if env not set): `admin@brand.com` / `Admin@123456`
+
+---
+
+## Scripts
+
+```bash
+npm run dev          # start development server
+npm run build        # production build
+npm run start        # run production server
+npm run lint         # eslint
+npm run seed:admin   # create admin (app must be running)
+npm run seed:lessons # seed lessons (app must be running)
+```
+
+---
+
+## Production notes
+
+- Seed routes (`/api/seed/*`) are **disabled** in production unless `ALLOW_SEED=true`.
+- In production, admin seed also requires `ADMIN_EMAIL` and `ADMIN_PASSWORD`.
+- After seeding, remove `ALLOW_SEED` immediately.
+- Auth cookie is `httpOnly`, `sameSite=lax`, and `secure` in production.

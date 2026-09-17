@@ -6,9 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed:lessons": "node -e \"fetch('http://localhost:3000/api/seed/lessons').then(async (res) => { const data = await res.json(); console.log(data); if (!res.ok) process.exit(1); }).catch(() => { console.error('Start the app first: npm run dev'); process.exit(1); })\"",
+    "seed:admin": "node -e \"fetch('http://localhost:3000/api/seed/admin').then(async (res) => { const data = await res.json(); console.log(data); if (!res.ok) process.exit(1); }).catch(() => { console.error('Start the app first: npm run dev'); process.exit(1); })\""
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "jsonwebtoken": "^9.0.3",
+    "lucide-react": "^1.35.0",
+    "mongoose": "^9.9.4",
     "next": "16.3.3",
     "react": "19.2.8",
     "react-dom": "19.2.8"
