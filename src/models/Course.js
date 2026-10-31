@@ -51,6 +51,12 @@ const courseSchema = new mongoose.Schema(
       required: true,
     },
 
+        price: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+
     lessons: [
       {
         title: {
