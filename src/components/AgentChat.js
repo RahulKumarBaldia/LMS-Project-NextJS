@@ -47,6 +47,7 @@ export default function AgentChat() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [ready, setReady] = useState(false);
+  const [needsLogin, setNeedsLogin] = useState(false);
   const [checkout, setCheckout] = useState(null);
   const [enrolled, setEnrolled] = useState(null);
   const [error, setError] = useState("");
@@ -60,6 +61,13 @@ export default function AgentChat() {
     async function loadHistory() {
       try {
         const res = await fetch("/api/agent");
+
+        // Login nahi hai toh error ki jagah login ka card dikhao
+        if (res.status === 401) {
+          if (!cancelled) setNeedsLogin(true);
+          return;
+        }
+
         const data = await res.json();
         if (!res.ok) throw new Error(data.message || "Could not load chat");
         if (cancelled) return;
@@ -101,6 +109,12 @@ export default function AgentChat() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text }),
       });
+
+      if (res.status === 401) {
+        setNeedsLogin(true);
+        return;
+      }
+
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Something went wrong");
 
@@ -150,6 +164,34 @@ export default function AgentChat() {
       ...prev,
       { role: "assistant", text: `You are enrolled in ${title}. Happy learning!` },
     ]);
+  }
+
+  if (needsLogin) {
+    return (
+      <div className="mx-auto max-w-md rounded-2xl border border-neutral-200 bg-white p-8 text-center shadow-sm">
+        <h1 className="text-xl font-semibold text-neutral-900">
+          Please log in to use the AI Advisor
+        </h1>
+        <p className="mt-2 text-sm text-neutral-500">
+          The advisor checks which courses you already own and sets up your
+          checkout, so it needs your account.
+        </p>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
+          <Link
+            href="/auth"
+            className="rounded-full bg-neutral-900 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-neutral-800"
+          >
+            Login
+          </Link>
+          <Link
+            href="/auth?mode=signup"
+            className="rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-neutral-900 transition hover:border-neutral-900"
+          >
+            Create Account
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   return (

@@ -9,14 +9,32 @@ import { useAuth } from "@/context/AuthContext";
 const links = [
   { href: "/", label: "Home" },
   { href: "/courses", label: "Courses" },
+  { href: "/assistant", label: "AI Advisor" },
 ];
 
 export default function Navbar() {
   const { user, logout } = useAuth();
   const pathname = usePathname();
 
-  const [open, setOpen] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openPath, setOpenPath] = useState(null);
+  const [mobileOpenPath, setMobileOpenPath] = useState(null);
+  const open = openPath === pathname;
+  const mobileOpen = mobileOpenPath === pathname;
+
+  function setOpen(value) {
+    setOpenPath((current) => {
+      const next = typeof value === "function" ? value(current === pathname) : value;
+      return next ? pathname : null;
+    });
+  }
+
+  function setMobileOpen(value) {
+    setMobileOpenPath((current) => {
+      const next = typeof value === "function" ? value(current === pathname) : value;
+      return next ? pathname : null;
+    });
+  }
+
   const dropdownRef = useRef(null);
 
   const navLinks =
@@ -49,11 +67,6 @@ export default function Navbar() {
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
   }, []);
-
-  useEffect(() => {
-    setOpen(false);
-    setMobileOpen(false);
-  }, [pathname]);
 
   function isActive(href) {
     if (href === "/") return pathname === "/";
