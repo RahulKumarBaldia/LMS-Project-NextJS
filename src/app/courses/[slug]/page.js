@@ -72,6 +72,8 @@ export default async function CourseDetailsPage({ params }) {
     0
   );
   const startHref = lessons.find((lesson) => lesson.href)?.href || null;
+  const price = Number(course.price) || 0;
+  const isPaid = price > 0;
 
   return (
     <main className="min-h-screen w-full bg-neutral-50">
@@ -129,17 +131,34 @@ export default async function CourseDetailsPage({ params }) {
 
             <aside className="lg:col-span-1">
               <div className="sticky top-24 rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
-                <p className="text-sm font-medium text-neutral-500">
-                  Ready to start?
-                </p>
-                <h2 className="mt-1 text-xl font-semibold text-neutral-900">
-                  Enroll in this course
-                </h2>
+                {isPaid ? (
+                  <>
+                    <p className="text-sm font-medium text-neutral-500">
+                      One-time payment
+                    </p>
+                    <h2 className="mt-1 text-3xl font-bold text-neutral-900">
+                      ${price}{" "}
+                      <span className="text-sm font-normal text-neutral-500">
+                        USD
+                      </span>
+                    </h2>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-sm font-medium text-neutral-500">
+                      Ready to start?
+                    </p>
+                    <h2 className="mt-1 text-xl font-semibold text-neutral-900">
+                      Enroll in this course
+                    </h2>
+                  </>
+                )}
 
                 <div className="mt-6">
                   <EnrollBtn
                     courseId={course._id.toString()}
                     startHref={startHref}
+                    price={price}
                   />
                 </div>
 
@@ -270,8 +289,9 @@ export default async function CourseDetailsPage({ params }) {
             <div className="rounded-3xl border border-neutral-200 bg-neutral-900 p-6 text-white shadow-sm">
               <h3 className="text-base font-semibold">Start building today</h3>
               <p className="mt-2 text-sm leading-relaxed text-neutral-300">
-                Enroll to unlock the full curriculum and track your progress as
-                you learn.
+                {isPaid
+                  ? "Buy this course with PayPal to unlock the full curriculum and track your progress as you learn."
+                  : "Enroll to unlock the full curriculum and track your progress as you learn."}
               </p>
               {startHref ? (
                 <Link
