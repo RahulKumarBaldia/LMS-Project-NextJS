@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import InputField from "./InputField";
+import PasswordInput from "./PasswordInput";
 
 export default function SignupForm() {
   const [formData, setFormData] = useState({
@@ -127,19 +128,17 @@ export default function SignupForm() {
         required
       />
 
-      <InputField
+      <PasswordInput
         onChange={handleChange}
         label="Password"
-        type="password"
         name="password"
         placeholder="••••••••"
         required
       />
 
-      <InputField
+      <PasswordInput
         onChange={handleChange}
         label="Confirm Password"
-        type="password"
         name="confirmPassword"
         placeholder="••••••••"
         required

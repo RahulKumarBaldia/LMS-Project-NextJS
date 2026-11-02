@@ -1,6 +1,7 @@
 "use client";
 
 import InputField from "./InputField";
+import PasswordInput from "./PasswordInput";
 import { useState } from "react";
 
 export default function LoginForm() {
@@ -87,10 +88,9 @@ export default function LoginForm() {
         required
       />
 
-      <InputField
+      <PasswordInput
         onChange={handleChange}
         label="Password"
-        type="password"
         name="password"
         placeholder="••••••••"
         required
