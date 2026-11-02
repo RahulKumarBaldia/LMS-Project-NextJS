@@ -36,9 +36,9 @@ export default function PasswordInput({
           aria-pressed={visible}
         >
           {visible ? (
-            <EyeOff className="h-4 w-4" strokeWidth={2} aria-hidden />
-          ) : (
             <Eye className="h-4 w-4" strokeWidth={2} aria-hidden />
+          ) : (
+            <EyeOff className="h-4 w-4" strokeWidth={2} aria-hidden />
           )}
         </button>
       </div>
