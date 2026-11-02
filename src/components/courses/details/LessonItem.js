@@ -10,7 +10,7 @@ export default function LessonItem({
   const content = (
     <>
       <div className="flex min-w-0 items-center gap-4">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-neutral-100 text-sm font-semibold text-neutral-600 transition group-hover:bg-neutral-900 group-hover:text-white">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-blue-50 text-sm font-semibold text-blue-700 transition group-hover:bg-blue-600 group-hover:text-white">
           {index + 1}
         </span>
 
@@ -34,7 +34,7 @@ export default function LessonItem({
         {href ? (
           <PlayCircle
             size={18}
-            className="text-neutral-300 transition group-hover:text-neutral-900"
+            className="text-blue-200 transition group-hover:text-blue-600"
             aria-hidden="true"
           />
         ) : null}
@@ -46,7 +46,7 @@ export default function LessonItem({
     return (
       <Link
         href={href}
-        className="group flex items-center justify-between gap-4 border-b border-neutral-100 px-5 py-4 last:border-b-0 transition hover:bg-neutral-50"
+        className="group flex items-center justify-between gap-4 border-b border-slate-100 px-5 py-4 last:border-b-0 transition hover:bg-blue-50/80"
       >
         {content}
       </Link>

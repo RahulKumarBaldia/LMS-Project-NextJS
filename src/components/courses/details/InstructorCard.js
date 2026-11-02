@@ -3,7 +3,7 @@ export default function InstructorCard({ name, role = "Instructor" }) {
 
   return (
     <div className="flex items-center gap-4 rounded-2xl border border-neutral-200 bg-white p-4">
-      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-neutral-900 text-sm font-semibold text-white">
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white">
         {initial}
       </div>
       <div className="min-w-0">

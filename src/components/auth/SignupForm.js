@@ -1,10 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import InputField from "./InputField";
 import PasswordInput from "./PasswordInput";
+import { resolveAuthRedirect } from "@/lib/authRedirect";
 
 export default function SignupForm() {
+  const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -98,8 +101,10 @@ export default function SignupForm() {
         return;
       }
 
-      const redirectTo =
-        data.user?.role === "admin" ? "/admin" : "/dashboard";
+      const redirectTo = resolveAuthRedirect(
+        data.user,
+        searchParams.get("next")
+      );
 
       window.location.href = redirectTo;
     } catch (error) {
@@ -146,7 +151,7 @@ export default function SignupForm() {
 
       <button
         type="submit"
-        className="mt-2 rounded-full bg-neutral-900 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-neutral-800 hover:shadow-lg"
+        className="mt-2 rounded-full bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/25"
       >
         Sign Up
       </button>

@@ -16,7 +16,7 @@ const emptyForm = {
 };
 
 const fieldClass =
-  "w-full rounded-2xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-neutral-400 focus:ring-2 focus:ring-neutral-100";
+  "w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-100";
 
 export default function AdminCourses() {
   const [courses, setCourses] = useState([]);
@@ -161,7 +161,7 @@ export default function AdminCourses() {
 
           <Link
             href="/courses"
-            className="rounded-full border border-neutral-200 bg-white px-5 py-2.5 text-sm font-semibold text-neutral-700 transition hover:border-neutral-900 hover:text-neutral-900"
+            className="rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-blue-500 hover:bg-blue-50 hover:text-blue-700"
           >
             View catalog
           </Link>
@@ -180,7 +180,7 @@ export default function AdminCourses() {
           className="mb-10 space-y-5 rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm sm:p-8"
         >
           <div className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-neutral-900 text-white">
+            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-600 text-white">
               <Plus size={18} />
             </span>
             <div>
@@ -264,7 +264,7 @@ export default function AdminCourses() {
             <button
               type="submit"
               disabled={loading}
-              className="rounded-full bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800 disabled:opacity-50"
+              className="rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:opacity-50"
             >
               {loading
                 ? "Saving..."
@@ -277,7 +277,7 @@ export default function AdminCourses() {
               <button
                 type="button"
                 onClick={cancelEdit}
-                className="rounded-full border border-neutral-200 px-6 py-3 text-sm font-semibold text-neutral-700 transition hover:border-neutral-900"
+                className="rounded-full border border-neutral-200 px-6 py-3 text-sm font-semibold text-neutral-700 transition hover:border-blue-600"
               >
                 Cancel
               </button>
@@ -336,7 +336,7 @@ export default function AdminCourses() {
                       <button
                         type="button"
                         onClick={() => handleEdit(course)}
-                        className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 px-4 py-2 text-sm font-semibold text-neutral-700 transition hover:border-neutral-900"
+                        className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 px-4 py-2 text-sm font-semibold text-neutral-700 transition hover:border-blue-600"
                       >
                         <Pencil size={14} />
                         Edit
@@ -344,7 +344,7 @@ export default function AdminCourses() {
                       <button
                         type="button"
                         onClick={() => handleDelete(course.slug)}
-                        className="inline-flex items-center gap-1.5 rounded-full bg-rose-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-rose-700"
+                        className="inline-flex items-center gap-1.5 rounded-full bg-blue-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-800"
                       >
                         <Trash2 size={14} />
                         Delete

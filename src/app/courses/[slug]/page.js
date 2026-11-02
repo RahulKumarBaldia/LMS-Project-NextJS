@@ -10,6 +10,9 @@ import {
 import EnrollBtn from "@/components/courses/details/EnrollBtn";
 import InstructorCard from "@/components/courses/details/InstructorCard";
 import LessonItem from "@/components/courses/details/LessonItem";
+import AllCoursesLink from "@/components/courses/AllCoursesLink";
+import RememberOpenCourse from "@/components/courses/RememberOpenCourse";
+import CourseThumbnail from "@/components/courses/CourseThumbnail";
 import {
   difficultyStyles,
   formatDuration,
@@ -25,8 +28,8 @@ export default async function CourseDetailsPage({ params }) {
 
   if (!course) {
     return (
-      <main className="flex min-h-[60vh] items-center justify-center bg-neutral-50 px-6">
-        <div className="max-w-md rounded-2xl border border-neutral-200 bg-white px-8 py-12 text-center shadow-sm">
+      <main className="flex min-h-[60vh] items-center justify-center bg-slate-50 px-6">
+        <div className="max-w-md rounded-2xl border border-slate-200 bg-white px-8 py-12 text-center shadow-sm">
           <h1 className="text-2xl font-semibold text-neutral-900">
             Course not found
           </h1>
@@ -34,8 +37,8 @@ export default async function CourseDetailsPage({ params }) {
             The course you are looking for does not exist.
           </p>
           <Link
-            href="/courses"
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-neutral-800"
+            href="/courses?view=catalog"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700"
           >
             <ArrowLeft size={16} />
             Back to courses
@@ -66,7 +69,6 @@ export default async function CourseDetailsPage({ params }) {
         }));
 
   const theme = getCategoryTheme(course.category);
-  const Icon = theme.icon;
   const totalMinutes = lessons.reduce(
     (sum, lesson) => sum + parseDurationMinutes(lesson.duration),
     0
@@ -76,61 +78,37 @@ export default async function CourseDetailsPage({ params }) {
   const isPaid = price > 0;
 
   return (
-    <main className="min-h-screen w-full bg-neutral-50">
-      <section className="relative overflow-hidden border-b border-neutral-200 bg-white">
+    <main className="min-h-screen w-full bg-slate-50">
+      <RememberOpenCourse slug={course.slug} />
+      <section className="relative overflow-hidden border-b border-slate-200 bg-white">
         <div
-          className={`absolute inset-0 bg-gradient-to-br ${theme.cover} opacity-[0.08]`}
+          className={`absolute inset-0 bg-gradient-to-br ${theme.cover} opacity-[0.06]`}
           aria-hidden="true"
         />
 
         <div className="relative mx-auto max-w-6xl px-6 py-8 sm:py-10">
-          <Link
-            href="/courses"
-            className="inline-flex items-center gap-2 text-sm font-medium text-neutral-500 transition hover:text-neutral-900"
-          >
-            <ArrowLeft size={16} />
-            All courses
-          </Link>
+          <AllCoursesLink />
 
           <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10">
             <div className="lg:col-span-2">
-              <div
-                className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${theme.cover} p-8 text-white shadow-lg sm:p-10`}
-              >
-                <div
-                  className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10"
-                  aria-hidden="true"
-                />
-                <div
-                  className="pointer-events-none absolute bottom-8 right-16 h-24 w-24 rounded-full bg-white/5"
-                  aria-hidden="true"
-                />
-
-                <div className="relative flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-black/25 px-3 py-1 text-xs font-medium backdrop-blur-sm">
-                    {course.category}
-                  </span>
-                  <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-medium ring-1 ring-white/25 backdrop-blur-sm">
+              <CourseThumbnail
+                title={course.title}
+                category={course.category}
+                size="hero"
+                className="rounded-3xl shadow-xl shadow-blue-900/15"
+                badge={
+                  <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-medium text-white ring-1 ring-white/25 backdrop-blur-sm">
                     {course.difficulty}
                   </span>
-                </div>
-
-                <div className="relative mt-8 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 ring-1 ring-white/20 backdrop-blur-sm">
-                  <Icon size={26} strokeWidth={1.75} />
-                </div>
-
-                <h1 className="relative mt-6 max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">
-                  {course.title}
-                </h1>
-
-                <p className="relative mt-4 max-w-2xl text-base leading-relaxed text-white/80">
-                  {course.description}
-                </p>
-              </div>
+                }
+              />
+              <p className="mt-6 text-base leading-relaxed text-slate-600">
+                {course.description}
+              </p>
             </div>
 
             <aside className="lg:col-span-1">
-              <div className="sticky top-24 rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
+              <div className="sticky top-24 rounded-3xl border border-slate-200 bg-white p-6 shadow-lg shadow-slate-200/40">
                 {isPaid ? (
                   <>
                     <p className="text-sm font-medium text-neutral-500">
@@ -199,7 +177,7 @@ export default async function CourseDetailsPage({ params }) {
                       <span className="inline-flex items-center gap-1 font-medium text-neutral-900">
                         <Star
                           size={14}
-                          className="fill-amber-400 text-amber-400"
+                          className="fill-blue-400 text-blue-400"
                         />
                         {course.rating}
                       </span>
@@ -286,9 +264,9 @@ export default async function CourseDetailsPage({ params }) {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-neutral-200 bg-neutral-900 p-6 text-white shadow-sm">
+            <div className="rounded-3xl border border-blue-900 bg-gradient-to-br from-blue-950 to-blue-900 p-6 text-white shadow-lg">
               <h3 className="text-base font-semibold">Start building today</h3>
-              <p className="mt-2 text-sm leading-relaxed text-neutral-300">
+              <p className="mt-2 text-sm leading-relaxed text-blue-100">
                 {isPaid
                   ? "Buy this course with PayPal to unlock the full curriculum and track your progress as you learn."
                   : "Enroll to unlock the full curriculum and track your progress as you learn."}
@@ -296,7 +274,7 @@ export default async function CourseDetailsPage({ params }) {
               {startHref ? (
                 <Link
                   href={startHref}
-                  className="mt-5 inline-flex rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-neutral-900 transition hover:bg-neutral-100"
+                  className="mt-5 inline-flex rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-blue-900 transition hover:bg-blue-50"
                 >
                   Preview first lesson
                 </Link>

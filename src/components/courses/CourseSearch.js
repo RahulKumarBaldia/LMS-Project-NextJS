@@ -32,7 +32,7 @@ export default function CourseSearch({ value, onSearch }) {
       <input
         type="search"
         placeholder="Search courses..."
-        className="w-full rounded-2xl border border-neutral-200 bg-white py-3.5 pl-12 pr-5 text-sm text-neutral-900 shadow-sm outline-none transition focus:border-neutral-400 focus:ring-2 focus:ring-neutral-100 placeholder:text-neutral-400"
+        className="w-full rounded-2xl border border-slate-200 bg-white py-3.5 pl-12 pr-5 text-sm text-slate-900 shadow-sm outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100 placeholder:text-slate-400"
         value={term}
         onChange={(e) => setTerm(e.target.value)}
       />

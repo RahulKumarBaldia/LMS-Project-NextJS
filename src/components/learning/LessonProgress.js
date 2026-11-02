@@ -140,7 +140,7 @@ export default function LessonProgress({ courseId, lessonId }) {
         </div>
 
         <div className="h-2.5 overflow-hidden rounded-full bg-neutral-100">
-          <div className="h-full w-0 rounded-full bg-neutral-900" />
+          <div className="h-full w-0 rounded-full bg-blue-600" />
         </div>
 
         <p className="mt-4 text-sm text-neutral-500">
@@ -149,7 +149,7 @@ export default function LessonProgress({ courseId, lessonId }) {
 
         <Link
           href="/auth"
-          className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-neutral-900 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-neutral-800 hover:shadow-lg"
+          className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg"
         >
           <Lock size={15} />
           Login to Track Progress
@@ -173,7 +173,7 @@ export default function LessonProgress({ courseId, lessonId }) {
 
       <div className="h-2.5 overflow-hidden rounded-full bg-neutral-100">
         <div
-          className="h-full rounded-full bg-neutral-900 transition-all duration-500"
+          className="h-full rounded-full bg-blue-600 transition-all duration-500"
           style={{ width: `${roundedProgress}%` }}
         />
       </div>
@@ -184,8 +184,8 @@ export default function LessonProgress({ courseId, lessonId }) {
         disabled={completed || marking}
         className={`mt-5 inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 disabled:cursor-not-allowed ${
           completed
-            ? "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200"
-            : "bg-neutral-900 text-white hover:-translate-y-0.5 hover:bg-neutral-800 hover:shadow-lg disabled:hover:translate-y-0 disabled:hover:shadow-none"
+            ? "bg-blue-50 text-blue-700 ring-1 ring-blue-200"
+            : "bg-blue-600 text-white hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg disabled:hover:translate-y-0 disabled:hover:shadow-none"
         }`}
       >
         {completed ? (

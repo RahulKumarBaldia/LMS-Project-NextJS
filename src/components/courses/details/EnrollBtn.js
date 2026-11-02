@@ -95,7 +95,7 @@ export default function EnrollBtn({ courseId, startHref, price = 0 }) {
       <button
         type="button"
         disabled
-        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-neutral-900 px-6 py-3.5 text-sm font-semibold text-white opacity-60"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white opacity-60"
       >
         <LoaderCircle size={16} className="animate-spin" />
         Loading...
@@ -106,7 +106,7 @@ export default function EnrollBtn({ courseId, startHref, price = 0 }) {
   if (enrolled) {
     return (
       <div className="space-y-3">
-        <div className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-emerald-50 px-6 py-3 text-sm font-semibold text-emerald-700 ring-1 ring-emerald-200">
+        <div className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-blue-50 px-6 py-3 text-sm font-semibold text-blue-700 ring-1 ring-blue-200">
           <CheckCircle2 size={16} />
           Enrolled
         </div>
@@ -114,7 +114,7 @@ export default function EnrollBtn({ courseId, startHref, price = 0 }) {
           <button
             type="button"
             onClick={() => router.push(startHref)}
-            className="w-full rounded-full bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800"
+            className="w-full rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
           >
             Continue Learning
           </button>
@@ -130,7 +130,7 @@ export default function EnrollBtn({ courseId, startHref, price = 0 }) {
         <button
           type="button"
           onClick={() => router.push("/auth")}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-neutral-900 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-neutral-800 hover:shadow-lg"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg"
         >
           Login to Buy
         </button>
@@ -157,7 +157,7 @@ export default function EnrollBtn({ courseId, startHref, price = 0 }) {
       type="button"
       disabled={loading}
       onClick={handleFreeEnroll}
-      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-neutral-900 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-neutral-800 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:shadow-none"
+      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:shadow-none"
     >
       {loading ? (
         <>

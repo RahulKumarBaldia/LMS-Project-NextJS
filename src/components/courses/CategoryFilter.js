@@ -26,8 +26,8 @@ export default function CategoryFilter({
             }
             className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
               active
-                ? "bg-neutral-900 text-white shadow-sm"
-                : "bg-white text-neutral-600 ring-1 ring-neutral-200 hover:text-neutral-900 hover:ring-neutral-400"
+                ? "bg-blue-600 text-white shadow-sm shadow-blue-500/20"
+                : "bg-white text-slate-600 ring-1 ring-slate-200 hover:text-slate-900 hover:ring-blue-200"
             }`}
           >
             {category}

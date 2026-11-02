@@ -25,6 +25,13 @@ const userSchema = new mongoose.Schema(
       enum: ["student", "instructor", "admin"],
       default: "student",
     },
+
+    // Last course detail page the user had open (restored via Courses nav)
+    lastOpenCourseSlug: {
+      type: String,
+      default: null,
+      trim: true,
+    },
   },
   { timestamps: true }
 );

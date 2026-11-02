@@ -43,14 +43,12 @@ export default function HomePage() {
     <>
       <HeroSection />
 
-      <section className="w-full bg-neutral-50 py-20">
+      <section className="w-full bg-slate-50 py-20">
         <div className="mx-auto max-w-6xl px-6">
           <div className="mb-10 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div>
-              <p className="text-sm font-medium tracking-wide text-neutral-400">
-                Start here
-              </p>
-              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
+              <p className="section-eyebrow">Start here</p>
+              <h2 className="mt-2 page-heading">
                 Featured Courses
               </h2>
               <p className="mt-3 max-w-lg text-base text-neutral-500">
@@ -59,8 +57,8 @@ export default function HomePage() {
             </div>
 
             <Link
-              href="/courses"
-              className="group inline-flex items-center gap-1.5 text-sm font-semibold text-neutral-900 transition hover:gap-2.5"
+              href="/courses?view=catalog"
+              className="group inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 transition hover:gap-2.5 hover:text-blue-700"
             >
               Browse all
               <ArrowRight size={16} />

@@ -15,7 +15,7 @@ export default function EmptyState() {
       </p>
       <Link
         href="/courses"
-        className="mt-2 rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-neutral-800"
+        className="mt-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700"
       >
         Clear filters
       </Link>

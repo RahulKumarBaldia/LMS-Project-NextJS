@@ -15,7 +15,7 @@ export default function PasswordInput({
     <div className="flex flex-col gap-1.5">
       <label
         htmlFor={name}
-        className="text-sm font-medium text-neutral-700"
+        className="text-sm font-medium text-slate-700"
       >
         {label}
       </label>
@@ -25,7 +25,7 @@ export default function PasswordInput({
           name={name}
           type={visible ? "text" : "password"}
           placeholder={placeholder}
-          className="w-full rounded-2xl border border-neutral-200 bg-white px-4 py-3 pr-11 text-sm text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-neutral-400 focus:ring-2 focus:ring-neutral-100"
+          className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 pr-11 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
           {...rest}
         />
         <button

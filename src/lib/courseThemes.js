@@ -8,43 +8,43 @@ import {
 } from "lucide-react";
 
 export const difficultyStyles = {
-  Beginner: "bg-emerald-50 text-emerald-700 ring-emerald-200",
-  Intermediate: "bg-amber-50 text-amber-700 ring-amber-200",
-  Advanced: "bg-rose-50 text-rose-700 ring-rose-200",
+  Beginner: "bg-blue-50 text-blue-700 ring-blue-200",
+  Intermediate: "bg-blue-100 text-blue-800 ring-blue-300",
+  Advanced: "bg-blue-200 text-blue-900 ring-blue-400",
 };
 
 export const categoryThemes = {
   "Web Development": {
     icon: Code2,
-    cover: "from-neutral-800 via-neutral-700 to-neutral-600",
-    soft: "bg-neutral-100 text-neutral-700",
+    cover: "from-slate-800 via-indigo-900 to-violet-800",
+    soft: "bg-blue-50 text-blue-900 ring-1 ring-blue-100",
   },
   JavaScript: {
     icon: Braces,
-    cover: "from-amber-700 via-amber-600 to-orange-500",
-    soft: "bg-amber-50 text-amber-800",
+    cover: "from-amber-800 via-amber-600 to-orange-500",
+    soft: "bg-blue-50 text-blue-900 ring-1 ring-blue-100",
   },
   React: {
     icon: Atom,
-    cover: "from-sky-700 via-sky-600 to-cyan-500",
-    soft: "bg-sky-50 text-sky-800",
+    cover: "from-sky-800 via-blue-600 to-cyan-500",
+    soft: "bg-blue-50 text-blue-900 ring-1 ring-blue-100",
   },
   Backend: {
     icon: Server,
-    cover: "from-teal-800 via-teal-700 to-emerald-600",
-    soft: "bg-teal-50 text-teal-800",
+    cover: "from-emerald-900 via-teal-700 to-cyan-600",
+    soft: "bg-blue-50 text-blue-900 ring-1 ring-blue-100",
   },
   Database: {
     icon: Database,
-    cover: "from-stone-700 via-stone-600 to-neutral-500",
-    soft: "bg-stone-100 text-stone-700",
+    cover: "from-violet-900 via-purple-700 to-fuchsia-600",
+    soft: "bg-blue-50 text-blue-900 ring-1 ring-blue-100",
   },
 };
 
 export const defaultTheme = {
   icon: BookOpen,
-  cover: "from-neutral-800 via-neutral-700 to-neutral-600",
-  soft: "bg-neutral-100 text-neutral-700",
+  cover: "from-indigo-900 via-indigo-700 to-violet-600",
+  soft: "bg-blue-50 text-blue-900 ring-1 ring-blue-100",
 };
 
 export function getCategoryTheme(category) {

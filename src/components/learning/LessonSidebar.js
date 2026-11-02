@@ -31,15 +31,15 @@ export default function LessonSidebar({
               href={`/learn/${courseSlug}/${item.slug}`}
               className={`group mb-1 flex items-start gap-3 rounded-2xl px-3 py-3 transition ${
                 active
-                  ? "bg-neutral-900 text-white"
-                  : "text-neutral-700 hover:bg-neutral-50"
+                  ? "bg-blue-600 text-white"
+                  : "text-slate-700 hover:bg-blue-50"
               }`}
             >
               <span
                 className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold ${
                   active
                     ? "bg-white/15 text-white"
-                    : "bg-neutral-100 text-neutral-500 group-hover:bg-neutral-200"
+                    : "bg-blue-50 text-blue-600 group-hover:bg-blue-100"
                 }`}
               >
                 {active ? <Play size={11} fill="currentColor" /> : index + 1}

@@ -9,7 +9,7 @@ export default function InputField({
     <div className="flex flex-col gap-1.5">
       <label
         htmlFor={name}
-        className="text-sm font-medium text-neutral-700"
+        className="text-sm font-medium text-slate-700"
       >
         {label}
       </label>
@@ -18,7 +18,7 @@ export default function InputField({
         name={name}
         type={type}
         placeholder={placeholder}
-        className="rounded-2xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-neutral-400 focus:ring-2 focus:ring-neutral-100"
+        className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
         {...rest}
       />
     </div>

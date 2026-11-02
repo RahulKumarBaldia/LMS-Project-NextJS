@@ -13,7 +13,7 @@ const emptyForm = {
 };
 
 const fieldClass =
-  "w-full rounded-2xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition placeholder:text-neutral-400 focus:border-neutral-400 focus:ring-2 focus:ring-neutral-100";
+  "w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-100";
 
 export default function AdminLessons({ courseSlug }) {
   const [lessons, setLessons] = useState([]);
@@ -218,7 +218,7 @@ export default function AdminLessons({ courseSlug }) {
           <button
             type="submit"
             disabled={loading}
-            className="rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-neutral-800 disabled:opacity-50"
+            className="rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 disabled:opacity-50"
           >
             {loading
               ? "Saving..."
@@ -270,7 +270,7 @@ export default function AdminLessons({ courseSlug }) {
               <button
                 type="button"
                 onClick={() => handleDelete(lesson.slug)}
-                className="inline-flex items-center gap-1.5 rounded-full bg-rose-600 px-4 py-2 text-sm font-semibold text-white"
+                className="inline-flex items-center gap-1.5 rounded-full bg-blue-700 px-4 py-2 text-sm font-semibold text-white"
               >
                 <Trash2 size={14} />
                 Delete

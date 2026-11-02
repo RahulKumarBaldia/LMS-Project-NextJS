@@ -28,14 +28,10 @@ export default function DashboardHeader({ studentName, stats }) {
     <div className="w-full">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <p className="text-sm font-medium tracking-wide text-neutral-400">
-            Your learning hub
-          </p>
-          <h1 className="mt-1 text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
-            Welcome back, {studentName}
-          </h1>
-          <p className="mt-2 max-w-xl text-sm text-neutral-500 sm:text-base">
-            Continue your learning journey and keep making progress.
+          <p className="section-eyebrow">Your learning hub</p>
+          <h1 className="mt-1 page-heading">Welcome back, {studentName}</h1>
+          <p className="mt-2 max-w-xl text-sm text-slate-500 sm:text-base">
+            Continue your learning journey on Skillwern and keep making progress.
           </p>
         </div>
 
@@ -46,17 +42,15 @@ export default function DashboardHeader({ studentName, stats }) {
         {summary.map(({ label, value, icon: Icon }) => (
           <div
             key={label}
-            className="rounded-3xl border border-neutral-200 bg-white p-5 shadow-sm"
+            className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"
           >
             <div className="flex items-center justify-between gap-3">
-              <p className="text-2xl font-semibold text-neutral-900">
-                {value}
-              </p>
-              <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-neutral-100 text-neutral-700">
+              <p className="text-2xl font-semibold text-slate-900">{value}</p>
+              <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-50 text-blue-700">
                 <Icon size={18} />
               </span>
             </div>
-            <p className="mt-2 text-sm text-neutral-500">{label}</p>
+            <p className="mt-2 text-sm text-slate-500">{label}</p>
           </div>
         ))}
       </div>

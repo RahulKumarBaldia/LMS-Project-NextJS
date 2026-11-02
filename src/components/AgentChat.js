@@ -2,7 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import PayPalCheckout from "@/components/PayPalCheckout";
+import { useAuth } from "@/context/AuthContext";
+import AssistantChatSkeleton from "@/components/assistant/AssistantChatSkeleton";
 
 const SUGGESTIONS = [
   "I am a beginner and want to learn JavaScript, budget 15 dollars",
@@ -43,28 +46,32 @@ function TypingDots() {
 }
 
 export default function AgentChat() {
+  const router = useRouter();
+  const { isAuthenticated } = useAuth();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [ready, setReady] = useState(false);
-  const [needsLogin, setNeedsLogin] = useState(false);
+  const [sessionExpired, setSessionExpired] = useState(false);
   const [checkout, setCheckout] = useState(null);
   const [enrolled, setEnrolled] = useState(null);
   const [error, setError] = useState("");
   const [activityGroups, setActivityGroups] = useState([]);
   const bottomRef = useRef(null);
 
-  // Page khulte hi purani chat database se lao
   useEffect(() => {
+    if (!isAuthenticated) {
+      return;
+    }
+
     let cancelled = false;
 
     async function loadHistory() {
       try {
-        const res = await fetch("/api/agent");
+        const res = await fetch("/api/agent", { credentials: "include" });
 
-        // Login nahi hai toh error ki jagah login ka card dikhao
         if (res.status === 401) {
-          if (!cancelled) setNeedsLogin(true);
+          if (!cancelled) setSessionExpired(true);
           return;
         }
 
@@ -80,12 +87,14 @@ export default function AgentChat() {
       }
     }
 
+    setReady(false);
+    setSessionExpired(false);
     loadHistory();
 
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -107,11 +116,12 @@ export default function AgentChat() {
       const res = await fetch("/api/agent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ text }),
       });
 
       if (res.status === 401) {
-        setNeedsLogin(true);
+        setSessionExpired(true);
         return;
       }
 
@@ -144,7 +154,7 @@ export default function AgentChat() {
 
   async function resetChat() {
     try {
-      await fetch("/api/agent", { method: "DELETE" });
+      await fetch("/api/agent", { method: "DELETE", credentials: "include" });
     } catch {
       // delete fail ho toh bhi screen saaf kar do
     }
@@ -166,32 +176,14 @@ export default function AgentChat() {
     ]);
   }
 
-  if (needsLogin) {
-    return (
-      <div className="mx-auto max-w-md rounded-2xl border border-neutral-200 bg-white p-8 text-center shadow-sm">
-        <h1 className="text-xl font-semibold text-neutral-900">
-          Please log in to use the AI Advisor
-        </h1>
-        <p className="mt-2 text-sm text-neutral-500">
-          The advisor checks which courses you already own and sets up your
-          checkout, so it needs your account.
-        </p>
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
-          <Link
-            href="/auth"
-            className="rounded-full bg-neutral-900 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-neutral-800"
-          >
-            Login
-          </Link>
-          <Link
-            href="/auth?mode=signup"
-            className="rounded-full border border-neutral-300 px-6 py-2.5 text-sm font-semibold text-neutral-900 transition hover:border-neutral-900"
-          >
-            Create Account
-          </Link>
-        </div>
-      </div>
-    );
+  useEffect(() => {
+    if (sessionExpired) {
+      router.replace("/auth?next=/assistant");
+    }
+  }, [sessionExpired, router]);
+
+  if (sessionExpired || !ready) {
+    return <AssistantChatSkeleton />;
   }
 
   return (
@@ -221,13 +213,7 @@ export default function AgentChat() {
           aria-live="polite"
           className="flex h-[55vh] min-h-[340px] flex-col gap-4 overflow-y-auto px-5 py-5"
         >
-          {!ready && (
-            <p className="m-auto text-sm text-neutral-400">
-              Loading your chat...
-            </p>
-          )}
-
-          {ready && messages.length === 0 && (
+          {messages.length === 0 && (
             <div className="m-auto max-w-md text-center">
               <p className="text-sm font-medium text-neutral-700">
                 Try one of these
@@ -256,14 +242,14 @@ export default function AgentChat() {
               }`}
             >
               {message.role === "assistant" && (
-                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-neutral-900 text-[10px] font-semibold text-white">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-[10px] font-semibold text-white">
                   AI
                 </div>
               )}
               <div
                 className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
                   message.role === "user"
-                    ? "rounded-br-md bg-neutral-900 text-white"
+                    ? "rounded-br-md bg-blue-600 text-white"
                     : "rounded-bl-md bg-neutral-100 text-neutral-900"
                 }`}
               >
@@ -274,7 +260,7 @@ export default function AgentChat() {
 
           {loading && (
             <div className="flex items-end gap-2">
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-neutral-900 text-[10px] font-semibold text-white">
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-[10px] font-semibold text-white">
                 AI
               </div>
               <div className="rounded-2xl rounded-bl-md bg-neutral-100 px-3">
@@ -344,12 +330,12 @@ export default function AgentChat() {
             onChange={(event) => setInput(event.target.value)}
             placeholder="Type your message..."
             disabled={loading || !ready}
-            className="min-w-0 flex-1 rounded-xl border border-neutral-300 px-4 py-2.5 text-sm outline-none transition focus:border-neutral-900 disabled:bg-neutral-50"
+            className="min-w-0 flex-1 rounded-xl border border-neutral-300 px-4 py-2.5 text-sm outline-none transition focus:border-blue-500 disabled:bg-neutral-50"
           />
           <button
             type="submit"
             disabled={loading || !ready || !input.trim()}
-            className="rounded-xl bg-neutral-900 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-40"
           >
             Send
           </button>
@@ -380,7 +366,7 @@ export default function AgentChat() {
                       key={actionIndex}
                       className="flex items-start gap-2 rounded-lg bg-neutral-50 px-3 py-2"
                     >
-                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-neutral-900 text-[10px] font-semibold text-white">
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-600 text-[10px] font-semibold text-white">
                         {actionIndex + 1}
                       </span>
                       <div className="min-w-0">

@@ -88,8 +88,8 @@ export default async function DashboardPage() {
   };
 
   return (
-    <main className="min-h-screen w-full bg-neutral-50">
-      <div className="border-b border-neutral-200 bg-white">
+    <main className="min-h-screen w-full bg-slate-50">
+      <div className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-6xl px-6 py-10">
           <DashboardHeader studentName={user.name} stats={stats} />
         </div>

@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "LMSCourse",
-  description: "Practical project-based courses to learn, build, and grow.",
+  title: "Skillwern | Learn, Build, Grow",
+  description: "Practical project-based courses to learn, build, and grow on Skillwern.",
 };
 
 export default function RootLayout({ children }) {

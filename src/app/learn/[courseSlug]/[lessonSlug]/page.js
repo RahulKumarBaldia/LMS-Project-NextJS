@@ -49,7 +49,7 @@ function NotFoundState({ title, message, href = "/courses" }) {
         <p className="mt-2 text-neutral-500">{message}</p>
         <Link
           href={href}
-          className="mt-6 inline-flex items-center gap-2 rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-neutral-800"
+          className="mt-6 inline-flex items-center gap-2 rounded-full bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700"
         >
           <ArrowLeft size={16} />
           Back to courses
@@ -125,7 +125,7 @@ export default async function LearningPage({ params }) {
           <div className="min-w-0">
             <Link
               href={`/courses/${courseSlug}`}
-              className="inline-flex items-center gap-2 text-sm font-medium text-neutral-500 transition hover:text-neutral-900"
+              className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 transition hover:text-blue-700"
             >
               <ArrowLeft size={16} />
               Back to course
@@ -173,7 +173,7 @@ export default async function LearningPage({ params }) {
                 ) : null}
               </div>
 
-              <div className="mt-6 overflow-hidden rounded-2xl bg-neutral-900 shadow-inner">
+              <div className="mt-6 overflow-hidden rounded-2xl bg-blue-950 shadow-inner">
                 <div className="aspect-video w-full">
                   {isYouTube ? (
                     <iframe
@@ -225,7 +225,7 @@ export default async function LearningPage({ params }) {
               {navigation?.previousLesson?.slug ? (
                 <Link
                   href={`/learn/${courseSlug}/${navigation.previousLesson.slug}`}
-                  className="group inline-flex items-center justify-center gap-2 rounded-full border border-neutral-200 px-5 py-3 text-sm font-semibold text-neutral-700 transition hover:border-neutral-900 hover:text-neutral-900"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-blue-500 hover:bg-blue-50 hover:text-blue-700"
                 >
                   <ArrowLeft
                     size={16}
@@ -242,7 +242,7 @@ export default async function LearningPage({ params }) {
               {navigation?.nextLesson?.slug ? (
                 <Link
                   href={`/learn/${courseSlug}/${navigation.nextLesson.slug}`}
-                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-neutral-900 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-neutral-800 hover:shadow-lg"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg"
                 >
                   <span className="max-w-[180px] truncate">
                     {navigation.nextLesson.title || "Next Lesson"}
@@ -255,7 +255,7 @@ export default async function LearningPage({ params }) {
               ) : (
                 <Link
                   href={`/courses/${courseSlug}`}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-neutral-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
                 >
                   Back to course
                 </Link>
