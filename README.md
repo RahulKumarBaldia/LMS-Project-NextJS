@@ -4,7 +4,7 @@ Built for the **PayPal AI Hackathon** (Devpost).
 
 LMSCourse is a full-stack Learning Management System built with Next.js and MongoDB. For this hackathon I added an **AI course advisor agent** and **PayPal checkout** on top of it. A student tells the agent what they want to learn and their budget. The agent searches the real course catalog, checks what the student already owns, recommends courses, and prepares a PayPal checkout. **The agent can never charge anyone. The student approves every payment on PayPal.**
 
-- Hosted demo: [ADD HOSTED DEMO LINK]
+- Hosted demo: https://lms-project-next-js-bols.vercel.app
 - Demo video (under 3 minutes): [ADD YOUTUBE LINK]
 
 ## The problem
@@ -150,10 +150,10 @@ Sign up, open `http://localhost:3000/assistant`, and ask for a course.
 
 ## Testing instructions for judges
 
-1. Open the hosted demo: [ADD HOSTED DEMO LINK]. Or run it locally with the steps above.
+1. Open the hosted demo: https://lms-project-next-js-bols.vercel.app or run it locally with the steps above.
 2. Log in with the demo student account:
-   - Email: `[ADD DEMO EMAIL]`
-   - Password: `[ADD DEMO PASSWORD]`
+   - Email: hacktest@gmail.com
+   - Password: hacktest123456
 
    You can also create your own account on the signup page.
 3. Open `/assistant`. Try:
@@ -163,8 +163,8 @@ Sign up, open `http://localhost:3000/assistant`, and ask for a course.
    - `I want to learn cooking` (nothing should match, and the agent should say so)
 4. Tell the agent which course you want. A **checkout card** appears. The agent has not charged anything at this point.
 5. Press the PayPal button and log in with this **PayPal sandbox buyer** (test account, no real money):
-   - Email: `[ADD SANDBOX BUYER EMAIL]`
-   - Password: `[ADD SANDBOX BUYER PASSWORD]`
+   - Email: sb-f2gim53356754@personal.example.com
+   - Password: 7N&i+q-q
 6. After payment, the app shows a success card and you are enrolled. Check `/dashboard`.
 
 Notes:
