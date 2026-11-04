@@ -2,10 +2,10 @@
 
 Built for the **PayPal AI Hackathon** (Devpost).
 
-LMSCourse is a full-stack Learning Management System built with Next.js and MongoDB. For this hackathon I added an **AI course advisor agent** and **PayPal checkout** on top of it. A student tells the agent what they want to learn and their budget. The agent searches the real course catalog, checks what the student already owns, recommends courses, and prepares a PayPal checkout. **The agent can never charge anyone. The student approves every payment on PayPal.**
+LMSCourse is a full-stack Learning Management System built with Next.js and MongoDB. For this hackathon, I added an **AI course advisor agent** and **PayPal checkout** on top of it. A student tells the agent what they want to learn and their budget. The agent searches the real course catalog, checks what the student already owns, recommends courses, and prepares a PayPal checkout. **The agent can never charge anyone. The student approves every payment on PayPal.**
 
 - Hosted demo: https://lms-project-next-js-bols.vercel.app
-- Demo video (under 3 minutes): [ADD YOUTUBE LINK]
+- Demo video (under 3 minutes): https://www.youtube.com/watch?v=d0ve2u2GBwg
 
 ## The problem
 
